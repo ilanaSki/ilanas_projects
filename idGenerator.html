@@ -1,1 +1,37 @@
-<h1>Hello World</h1>
+<div class="main">
+		<h1>Id Geneartor</h1>
+		<br><br>
+		<span id="fakeId"></span>
+		<br><br>
+		<button onclick="generateId()">generate valid israeli id</button>
+	
+	</div>
+	<script type="text/javascript">
+		
+	function generateId() {
+		var generatedId = 0;
+		var eightDigits = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
+		eightDigits = 99000000 + eightDigits;
+		generatedId = eightDigits; 
+		var sum = 0;
+		for (var i = 7; i >= 0; i--) {
+			var digit = eightDigits % 10;
+			eightDigits = Math.floor(eightDigits/10);
+			
+			if (0 != (i % 2)){
+				digit = digit*2
+				if(digit > 9){
+					digit = (digit % 10) + (Math.floor(digit / 10)); 
+				}
+			}
+				sum = sum + digit;
+		}
+		var controlDigit = 0;
+		if (0 != (sum % 10)) {
+			controlDigit = 10 - (sum % 10);
+		}
+		
+		var fakeId = window.document.getElementById("fakeId");
+		fakeId.textContent= generatedId.toString()+ controlDigit.toString() ;
+	}
+	</script>
